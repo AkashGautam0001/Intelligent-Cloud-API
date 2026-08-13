@@ -5,6 +5,7 @@ export const CONTACT_NEEDS = [
   "Managed Services",
   "Kubernetes",
   "DevOps Consulting",
+  "Partnership",
   "Other",
 ] as const;
 

@@ -11,10 +11,10 @@ export const ticketsPublicRouter = Router();
 export const ticketsAdminRouter = Router();
 
 const publicTicketSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  subject: z.string().min(1),
-  body: z.string().min(1),
+  name: z.string().trim().min(2),
+  email: z.string().trim().email("Enter a valid email address"),
+  subject: z.string().trim().min(5),
+  body: z.string().trim().min(20),
   tier: z.enum(TICKET_TIERS).optional().default("standard"),
   website: z.string().optional(),
   formStartedAt: z.coerce.number(),

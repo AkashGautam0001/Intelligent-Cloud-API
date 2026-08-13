@@ -10,15 +10,16 @@ import { AppError } from "../middleware/error";
 import { spamGuard, clientIp } from "../middleware/spam";
 import { notifyTeam, sendMail, sendMailSafe } from "../services/mail";
 import { contactAutoReply, contactNotifyTeam } from "../services/emailTemplates";
+import { emailSchema, phoneSchema } from "../lib/validation";
 
 export const contactRouter = Router();
 export const contactsAdminRouter = Router();
 
 const publicContactSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  company: z.string().min(1),
-  phone: z.string().min(1),
+  name: z.string().trim().min(2),
+  email: emailSchema,
+  company: z.string().trim().min(2),
+  phone: phoneSchema,
   need: z.enum(CONTACT_NEEDS),
   message: z.string().optional().default(""),
   website: z.string().optional(),

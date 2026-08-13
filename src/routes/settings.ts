@@ -3,6 +3,11 @@ import { z } from "zod";
 import { Settings } from "../models/Settings";
 import { requireAuth } from "../middleware/auth";
 import { AppError } from "../middleware/error";
+import {
+  emailSchema,
+  optionalHttpUrlSchema,
+  optionalPhoneSchema,
+} from "../lib/validation";
 
 export const settingsRouter = Router();
 
@@ -45,24 +50,24 @@ settingsRouter.get("/admin", requireAuth, async (_req, res, next) => {
 });
 
 const updateSchema = z.object({
-  email: z.string().email().optional(),
-  supportEmail: z.string().email().optional(),
-  phone: z.string().optional(),
-  whatsapp: z.string().optional(),
+  email: emailSchema.optional(),
+  supportEmail: emailSchema.optional(),
+  phone: optionalPhoneSchema,
+  whatsapp: optionalPhoneSchema,
   address: z.string().optional(),
   social: z
     .object({
-      linkedin: z.string().optional(),
-      twitter: z.string().optional(),
-      instagram: z.string().optional(),
-      youtube: z.string().optional(),
+      linkedin: optionalHttpUrlSchema,
+      twitter: optionalHttpUrlSchema,
+      instagram: optionalHttpUrlSchema,
+      youtube: optionalHttpUrlSchema,
     })
     .optional(),
   seo: z
     .object({
       defaultTitle: z.string().optional(),
       defaultDescription: z.string().optional(),
-      ogImageUrl: z.string().optional(),
+      ogImageUrl: optionalHttpUrlSchema,
     })
     .optional(),
 });

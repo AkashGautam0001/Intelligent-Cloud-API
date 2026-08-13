@@ -13,16 +13,17 @@ import {
   bookingReceivedConfirm,
   bookingReceivedTeam,
 } from "../services/emailTemplates";
+import { emailSchema, phoneSchema } from "../lib/validation";
 
 export const bookingsRouter = Router();
 export const bookingsAdminRouter = Router();
 
 const publicBookingSchema = z.object({
   need: z.enum(BOOKING_NEEDS),
-  name: z.string().min(1),
-  email: z.string().email(),
-  company: z.string().min(1),
-  phone: z.string().min(1),
+  name: z.string().trim().min(2),
+  email: emailSchema,
+  company: z.string().trim().min(2),
+  phone: phoneSchema,
   preferredDate: z.string().min(1),
   preferredTime: z.string().min(1),
   notes: z.string().optional().default(""),
