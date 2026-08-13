@@ -58,10 +58,12 @@ async function bootstrap() {
       name: "Intelligent-Cloud API",
       version: "0.1.3",
       health: "/health",
+      status: "/status",
     });
   });
 
   app.use("/health", healthRouter);
+  app.use("/status", healthRouter);
   app.use("/auth", authRouter);
   app.use("/settings", settingsRouter);
   app.use("/services", servicesRouter);
