@@ -20,6 +20,10 @@ import { bookingsRouter, bookingsAdminRouter } from "./routes/bookings";
 import { ticketsPublicRouter, ticketsAdminRouter } from "./routes/tickets";
 import { dashboardAdminRouter } from "./routes/dashboard";
 import { uploadsRouter } from "./routes/uploads";
+import {
+  analyticsPublicRouter,
+  analyticsAdminRouter,
+} from "./routes/analytics";
 import { errorHandler, notFoundHandler } from "./middleware/error";
 import { startBookingReminderJob } from "./jobs/bookingReminders";
 
@@ -84,6 +88,8 @@ async function bootstrap() {
   app.use("/admin/tickets", ticketsAdminRouter);
   app.use("/admin/dashboard", dashboardAdminRouter);
   app.use("/admin/uploads", uploadsRouter);
+  app.use("/analytics", analyticsPublicRouter);
+  app.use("/admin/analytics", analyticsAdminRouter);
 
   app.use(notFoundHandler);
   app.use(errorHandler);
