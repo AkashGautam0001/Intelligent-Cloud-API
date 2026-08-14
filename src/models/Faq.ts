@@ -3,7 +3,9 @@ import mongoose, { Schema, type InferSchemaType } from "mongoose";
 const faqSchema = new Schema(
   {
     question: { type: String, required: true, trim: true },
+    questionAr: { type: String, default: "", trim: true },
     answerHtml: { type: String, default: "" },
+    answerHtmlAr: { type: String, default: "" },
     answerJson: { type: Schema.Types.Mixed, default: null },
     category: { type: String, default: "general", trim: true, lowercase: true },
     order: { type: Number, default: 0 },

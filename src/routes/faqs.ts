@@ -34,7 +34,9 @@ faqsRouter.get("/:id", async (req, res, next) => {
 
 const faqBodySchema = z.object({
   question: z.string().min(1),
+  questionAr: z.string().optional(),
   answerHtml: z.string().optional(),
+  answerHtmlAr: z.string().optional(),
   answerJson: z.any().optional(),
   category: z.string().optional(),
   order: z.number().optional(),

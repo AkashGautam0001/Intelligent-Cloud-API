@@ -18,6 +18,15 @@ const seoSchema = new Schema(
       default:
         "Intelligent Cloud provides Cloud Migration, Managed Cloud, AI Solutions, Cybersecurity, DevOps, and Data Analytics services for startups and enterprises.",
     },
+    defaultTitleAr: {
+      type: String,
+      default: "خدمات السحابة | Intelligent Cloud",
+    },
+    defaultDescriptionAr: {
+      type: String,
+      default:
+        "توفر Intelligent Cloud خدمات ترحيل السحابة والسحابة المُدارة وحلول الذكاء الاصطناعي والأمن السيبراني وDevOps وتحليلات البيانات للشركات الناشئة والمؤسسات.",
+    },
     ogImageUrl: { type: String, default: "" },
   },
   { _id: false },
@@ -33,6 +42,10 @@ const settingsSchema = new Schema(
     address: {
       type: String,
       default: "Remote-first, serving clients globally",
+    },
+    addressAr: {
+      type: String,
+      default: "عن بُعد أولاً، نخدم العملاء عالميًا",
     },
     social: { type: socialSchema, default: () => ({}) },
     seo: { type: seoSchema, default: () => ({}) },

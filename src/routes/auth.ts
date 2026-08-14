@@ -74,3 +74,34 @@ authRouter.post("/logout", (_req, res) => {
   res.clearCookie("token");
   res.json({ success: true });
 });
+
+const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1),
+  newPassword: z.string().min(8),
+});
+
+authRouter.post("/change-password", requireAuth, async (req, res, next) => {
+  try {
+    const body = changePasswordSchema.parse(req.body);
+    const user = await AdminUser.findById(req.admin!.sub);
+    if (!user) {
+      throw new AppError("User not found", 404);
+    }
+
+    const ok = await bcrypt.compare(body.currentPassword, user.passwordHash);
+    if (!ok) {
+      throw new AppError("Current password is incorrect", 400);
+    }
+
+    if (body.currentPassword === body.newPassword) {
+      throw new AppError("New password must be different", 400);
+    }
+
+    user.passwordHash = await bcrypt.hash(body.newPassword, 10);
+    await user.save();
+
+    res.json({ success: true });
+  } catch (err) {
+    next(err);
+  }
+});

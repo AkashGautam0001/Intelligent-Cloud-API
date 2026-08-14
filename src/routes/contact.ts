@@ -109,12 +109,16 @@ contactsAdminRouter.patch("/:id", async (req, res, next) => {
   try {
     const body = z
       .object({
-        status: z.enum(CONTACT_STATUSES),
+        status: z.enum(CONTACT_STATUSES).optional(),
+        adminNotes: z.string().optional(),
       })
       .parse(req.body);
+    if (body.status === undefined && body.adminNotes === undefined) {
+      throw new AppError("Nothing to update", 400);
+    }
     const item = await ContactSubmission.findByIdAndUpdate(
       req.params.id,
-      { $set: { status: body.status } },
+      { $set: body },
       { new: true },
     );
     if (!item) {

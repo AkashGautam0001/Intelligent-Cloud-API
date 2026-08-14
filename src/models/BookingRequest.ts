@@ -26,6 +26,7 @@ const bookingRequestSchema = new Schema(
     preferredDate: { type: String, required: true, trim: true },
     preferredTime: { type: String, required: true, trim: true },
     notes: { type: String, default: "" },
+    adminNotes: { type: String, default: "" },
     status: {
       type: String,
       enum: BOOKING_STATUSES,

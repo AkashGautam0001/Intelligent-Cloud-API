@@ -132,6 +132,7 @@ bookingsAdminRouter.patch("/:id", async (req, res, next) => {
         preferredDate: z.string().optional(),
         preferredTime: z.string().optional(),
         notes: z.string().optional(),
+        adminNotes: z.string().optional(),
       })
       .parse(req.body);
 

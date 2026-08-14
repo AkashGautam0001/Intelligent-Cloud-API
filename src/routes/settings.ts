@@ -18,6 +18,7 @@ function toPublic(settings: InstanceType<typeof Settings>) {
     phone: settings.phone,
     whatsapp: settings.whatsapp,
     address: settings.address,
+    addressAr: settings.addressAr,
     social: settings.social,
     seo: settings.seo,
   };
@@ -55,6 +56,7 @@ const updateSchema = z.object({
   phone: optionalPhoneSchema,
   whatsapp: optionalPhoneSchema,
   address: z.string().optional(),
+  addressAr: z.string().optional(),
   social: z
     .object({
       linkedin: optionalHttpUrlSchema,
@@ -67,6 +69,8 @@ const updateSchema = z.object({
     .object({
       defaultTitle: z.string().optional(),
       defaultDescription: z.string().optional(),
+      defaultTitleAr: z.string().optional(),
+      defaultDescriptionAr: z.string().optional(),
       ogImageUrl: optionalHttpUrlSchema,
     })
     .optional(),

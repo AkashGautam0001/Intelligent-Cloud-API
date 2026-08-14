@@ -19,6 +19,7 @@ const contactSubmissionSchema = new Schema(
     phone: { type: String, required: true, trim: true },
     need: { type: String, required: true, trim: true },
     message: { type: String, default: "" },
+    adminNotes: { type: String, default: "" },
     status: {
       type: String,
       enum: CONTACT_STATUSES,
